@@ -540,14 +540,7 @@ async def task():
 				await init_data_list('kill_list.ini', '-----척살명단-----')
 
 			################ 고정 보스 확인 ################ 
-			for i in range(fixed_bossNum):
-				################ before_alert1 ################ 
-				if fixed_bossTime[i] <= priv0 and fixed_bossTime[i] > priv:
-					if basicSetting[3] != '0':
-						if fixed_bossFlag0[i] == False:
-							fixed_bossFlag0[i] = True
-							await client.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
-							await PlaySound(voice_client1, './sound/' + fixed_bossData[i][0] + '알림1.mp3')
+			
 
 				################ before_alert ################ 
 				if fixed_bossTime[i] <= priv and fixed_bossTime[i] > now:
@@ -831,24 +824,6 @@ async def dbLoad():
 		print ("보스타임 정보가 없습니다.")
 
 #고정보스 날짜저장
-async def FixedBossDateSave():
-	global fixed_bossData
-	global fixed_bossTime
-	global fixed_bossNum
-	global FixedBossDateData
-	global indexFixedBossname
-
-	for i in range(fixed_bossNum):
-		FixedBossDateData[indexFixedBossname[i] + 3] = 'startDate = '+ fixed_bossTime[i].strftime('%Y-%m-%d') + '\n'
-
-	FixedBossDateDataSTR = ""
-	for j in range(len(FixedBossDateData)):
-		pos = len(FixedBossDateData[j])
-		tmpSTR = FixedBossDateData[j][:pos-1] + '\r\n'
-		FixedBossDateDataSTR += tmpSTR
-
-	contents = repo.get_contents("fixed_boss.ini")
-	repo.update_file(contents.path, "bossDB", FixedBossDateDataSTR, contents.sha)
 
 #사다리함수		
 async def LadderFunc(number, ladderlist, channelVal):
