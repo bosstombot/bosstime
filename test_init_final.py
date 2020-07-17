@@ -357,28 +357,7 @@ def init():
 	tmp_fixed_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
 
 	############## 고정보스 정보 리스트 #####################	
-	for j in range(fixed_bossNum):
-		tmp_fixed_len = tmp_fixed_bossData[j][1].find(':')
-		tmp_fixedGen_len = tmp_fixed_bossData[j][2].find(':')
-		fb.append(tmp_fixed_bossData[j][0][11:])                  #fixed_bossData[0] : 보스명
-		fb.append(tmp_fixed_bossData[j][1][11:tmp_fixed_len])     #fixed_bossData[1] : 시
-		fb.append(tmp_fixed_bossData[j][1][tmp_fixed_len+1:])     #fixed_bossData[2] : 분
-		fb.append(tmp_fixed_bossData[j][4][20:])                  #fixed_bossData[3] : 분전 알림멘트
-		fb.append(tmp_fixed_bossData[j][5][13:])                  #fixed_bossData[4] : 젠 알림멘트
-		fb.append(tmp_fixed_bossData[j][2][12:tmp_fixedGen_len])  #fixed_bossData[5] : 젠주기-시
-		fb.append(tmp_fixed_bossData[j][2][tmp_fixedGen_len+1:])  #fixed_bossData[6] : 젠주기-분
-		fb.append(tmp_fixed_bossData[j][3][12:16])                #fixed_bossData[7] : 시작일-년	
-		fb.append(tmp_fixed_bossData[j][3][17:19])                #fixed_bossData[8] : 시작일-월
-		fb.append(tmp_fixed_bossData[j][3][20:22])                #fixed_bossData[9] : 시작일-일
-		fixed_bossData.append(fb)
-		fb = []
-		fixed_bossFlag.append(False)
-		fixed_bossFlag0.append(False)
-		fixed_bossTime.append(tmp_fixed_now.replace(year = int(fixed_bossData[j][7]), month = int(fixed_bossData[j][8]), day = int(fixed_bossData[j][9]), hour=int(fixed_bossData[j][1]), minute=int(fixed_bossData[j][2]), second = int(0)))
-		if fixed_bossTime[j] < tmp_fixed_now :
-			while fixed_bossTime[j] < tmp_fixed_now :
-				fixed_bossTime[j] = fixed_bossTime[j] + datetime.timedelta(hours=int(fixed_bossData[j][5]), minutes=int(fixed_bossData[j][6]), seconds = int(0))
-
+	
 	################# 이모지 로드 ######################
 
 	emo_inidata = repo.get_contents("emoji.ini")
