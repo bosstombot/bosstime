@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bosstime-283604",
+  "private_key_id": "56d0aa8018affaefe03569b636171812db04ea07",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC/KI6XIa5Nc9IU\ny4p9iKCLBC3/LlaZJPynW5ZIqbgAy6zeMA6XROJ/LqDj109EcGUufraSWa+Vq9xn\nlMDNYWQIlexCNKwQx4zAaducXbpi5p2lpcN2NIebLzZcxT6lUYaUGn1k50Ud6X89\nZzvZ6IXUOTMIs1e4zTvKSPKPcJL2j/lEMJG7tx8BdDq2HFmcF9z1CUvjUMLn9Eyq\nBWGX5FCAefg20sberrATRgtiE7wLlTRseIMtgs1GV5qdM89Uw6dSMox+3OmRAspC\n2GUqeVEoQSm2eUgfOu4sZddy554tanzABcUGuqjbkRNIirGo4Co52h89jlkip3ci\nHVZlfbG/AgMBAAECggEAGlIbdBwrSQyHYt1LJ+bTSDZJSRIt0q9rlHWsFzw7PZd4\nftgkzNerd4dJmFBSC004jrLcMQGQB4P0Tf+G8/XoKrXN+VMRqsvMicU++7mndi0P\n4Y+V/tApKIkogJSY1XWIxMVy+keigNsLmJOpg43HOPCuohDjpWqo7rz68nI14iS1\nlPJ7IL5YuPCBnkJ91J7xXEAjGCYpxzGtMRDrFuB3sGxhTuJ3RDNEsbXCxkH03l/N\nwHiuhoj1z/tZ9PXK+OBtx7R15p7N/bBG0IoJ/fTX0ZCnAq2tLIK/v1XAhJ8K93JS\nSidSg4ayFokwTsUhwnz4zwf4vZ3D1FwrpZ55MR1rhQKBgQDeXHwTnPBa8utzoWxo\nPoCjOqM7MLhZ8eNnYakzVnVlIbAmrtVhyPqZ30+BurhuX+YF3wsQwg8dpSuFGRnF\nuzMcUGWUDwUnuqAmv/m8p0rHBy6a9RQREdazZUtd8PkKoEjeQP6eoP9npPNCWXJ8\nUf1Idhrzz0BiWe9g7IlZ9CuRowKBgQDcE6lZ0LgOrJUtms4KRUoUlRytnn9ycza7\n7XAiU89s3EJX/ByieKUsFMDanBs8tx8oHUCdMwG+uURtOaFAl/z68tVwv7X2IIQl\nw8OVZXg4l/lOiqRa64VPc63A3pMv1VxjkHs5GNlyJz8jUwlicXY0bZJcr92qZDJ3\nkb3pb/v5NQKBgHi+WbXAu5d3Xzkrx5UXk3yPQ8HJY+GbgrNJibpR0W94CpIGz+HI\nY6QYabD1Nl7g/iPkCLsx1UlwviAJEECZtVhDo9TxDwiSw5InHrI9WVKX6MvGFv5p\n5F8HuxQo3OLTRJ5DRr/Whrm+DUXTEmLFlra5Q0tvF/QQB/dmmfLZrqrnAoGABnGw\n8MdSzGMzTw2MYPKcc7PWDiNo+fHztVcDhI3NshNVAfyI3h0IQR0udHhDt+hoyiTp\nInE+6NXF8ijQ1vJcXwDDTTTf4CAdnnl3/aTl+0o/65PVsi/ZTHVHrjEWQD1QIj41\nzXszysrpZ2BkEvTdkDVxJrOjmvyqGaQz2mUEDM0CgYBUzHNOgKR7goH42UY4zWKi\nCn7lcOWfBkZaGJ+LJ9MT55W1fnP06jqbd6mg4PbRE0I8phiQg5NiSEC9jDgC/U26\nIMkrleCKaLiHehTOT/hDm+lDLdg6dWmXeFvQE9Q3QNhAkBDVEtf4RFTV/p8QF3M+\n4hC3HI4voEwSU1+cUqCw4A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "eri-jungsan@bosstime-283604.iam.gserviceaccount.com",
+  "client_id": "110569166667457679709",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/eri-jungsan%40bosstime-283604.iam.gserviceaccount.com"
+}
