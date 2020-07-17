@@ -1680,7 +1680,7 @@ while True:
 				await ctx.send(embed=embed, tts=False)
 		else:
 			return
-		
+
 	################ 사다리 결과 출력 ################ 
 	@client.command(name=command[12][0], aliases=command[12][1:])
 	async def ladder_(ctx):
