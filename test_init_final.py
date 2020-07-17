@@ -542,32 +542,11 @@ async def task():
 			################ 고정 보스 확인 ################ 
 			for i in range(fixed_bossNum):
 				################ before_alert1 ################ 
-				if fixed_bossTime[i] <= priv0 and fixed_bossTime[i] > priv:
-					if basicSetting[3] != '0':
-						if fixed_bossFlag0[i] == False:
-							fixed_bossFlag0[i] = True
-							await client.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
-							await PlaySound(voice_client1, './sound/' + fixed_bossData[i][0] + '알림1.mp3')
-
+				
 				################ before_alert ################ 
-				if fixed_bossTime[i] <= priv and fixed_bossTime[i] > now:
-					if basicSetting[1] != '0' :
-						if fixed_bossFlag[i] == False:
-							fixed_bossFlag[i] = True
-							await client.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[1] + '분 전 ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
-							await PlaySound(voice_client1, './sound/' + fixed_bossData[i][0] + '알림.mp3')
 				
 				################ 보스 젠 시간 확인 ################
-				if fixed_bossTime[i] <= now :
-					fixed_bossTime[i] = fixed_bossTime[i]+datetime.timedelta(hours=int(fixed_bossData[i][5]), minutes=int(fixed_bossData[i][6]), seconds = int(0))
-					fixed_bossFlag0[i] = False
-					fixed_bossFlag[i] = False
-					embed = discord.Embed(
-							description= "```" + fixed_bossData[i][0] + fixed_bossData[i][4] + "```" ,
-							color=0x00ff00
-							)
-					await client.get_channel(channel).send(embed=embed, tts=False)
-					await PlaySound(voice_client1, './sound/' + fixed_bossData[i][0] + '젠.mp3')
+				
 
 			################ 일반 보스 확인 ################ 
 			for i in range(bossNum):
