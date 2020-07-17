@@ -1668,13 +1668,13 @@ while True:
 			cal_tax1 = floor(float(separate_money[1])*0.05)
 			
 			real_money = floor(floor(float(separate_money[1])) - cal_tax1)
-			cal_tax2 = floor(real_money*0.07)
+			cal_tax2 = floor(real_money*0.05)
 			if num_sep == 0 :
 				await ctx.send('```분배 인원이 0입니다. 재입력 해주세요.```', tts=False)
 			else :
 				embed = discord.Embed(
 					title = "----- 분배결과! -----",
-					description= '```1차 세금 : ' + str(cal_tax1) + '\n1차 수령액 : ' + str(real_money) + '\n분배자금액 : ' + str(floor(real_money/num_sep)) + '\n혈비 : ' + str(cal_tax2) + '\n인당 실수령액 : ' + str(floor(float(floor(real_money/num_sep))*0.93)) + '```',
+					description= '```1차 세금 : ' + str(cal_tax1) + '\n1차 수령액 : ' + str(real_money) + '\n분배자금액 : ' + str(floor(float(floor(real_money/num_sep))*0.95)+cal_tax2) + '\n혈비 : ' + str(cal_tax2) + '\n인당 실수령액 : ' + str(floor(float(floor(real_money/num_sep))*0.95)) + '```',
 					color=0xff00ff
 					)
 				await ctx.send(embed=embed, tts=False)
