@@ -357,7 +357,28 @@ def init():
 	tmp_fixed_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
 
 	############## 고정보스 정보 리스트 #####################	
-	
+	for j in range(fixed_bossNum):
+		tmp_fixed_len = tmp_fixed_bossData[j][1].find(':')
+		tmp_fixedGen_len = tmp_fixed_bossData[j][2].find(':')
+		fb.append(tmp_fixed_bossData[j][0][11:])                  #fixed_bossData[0] : 보스명
+		fb.append(tmp_fixed_bossData[j][1][11:tmp_fixed_len])     #fixed_bossData[1] : 시
+		fb.append(tmp_fixed_bossData[j][1][tmp_fixed_len+1:])     #fixed_bossData[2] : 분
+		fb.append(tmp_fixed_bossData[j][4][20:])                  #fixed_bossData[3] : 분전 알림멘트
+		fb.append(tmp_fixed_bossData[j][5][13:])                  #fixed_bossData[4] : 젠 알림멘트
+		fb.append(tmp_fixed_bossData[j][2][12:tmp_fixedGen_len])  #fixed_bossData[5] : 젠주기-시
+		fb.append(tmp_fixed_bossData[j][2][tmp_fixedGen_len+1:])  #fixed_bossData[6] : 젠주기-분
+		fb.append(tmp_fixed_bossData[j][3][12:16])                #fixed_bossData[7] : 시작일-년	
+		fb.append(tmp_fixed_bossData[j][3][17:19])                #fixed_bossData[8] : 시작일-월
+		fb.append(tmp_fixed_bossData[j][3][20:22])                #fixed_bossData[9] : 시작일-일
+		fixed_bossData.append(fb)
+		fb = []
+		fixed_bossFlag.append(False)
+		fixed_bossFlag0.append(False)
+		fixed_bossTime.append(tmp_fixed_now.replace(year = int(fixed_bossData[j][7]), month = int(fixed_bossData[j][8]), day = int(fixed_bossData[j][9]), hour=int(fixed_bossData[j][1]), minute=int(fixed_bossData[j][2]), second = int(0)))
+		if fixed_bossTime[j] < tmp_fixed_now :
+			while fixed_bossTime[j] < tmp_fixed_now :
+				fixed_bossTime[j] = fixed_bossTime[j] + datetime.timedelta(hours=int(fixed_bossData[j][5]), minutes=int(fixed_bossData[j][6]), seconds = int(0))
+
 	################# 이모지 로드 ######################
 
 	emo_inidata = repo.get_contents("emoji.ini")
@@ -519,7 +540,14 @@ async def task():
 				await init_data_list('kill_list.ini', '-----척살명단-----')
 
 			################ 고정 보스 확인 ################ 
-			
+			for i in range(fixed_bossNum):
+				################ before_alert1 ################ 
+				if fixed_bossTime[i] <= priv0 and fixed_bossTime[i] > priv:
+					if basicSetting[3] != '0':
+						if fixed_bossFlag0[i] == False:
+							fixed_bossFlag0[i] = True
+							await client.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
+							await PlaySound(voice_client1, './sound/' + fixed_bossData[i][0] + '알림1.mp3')
 
 				################ before_alert ################ 
 				if fixed_bossTime[i] <= priv and fixed_bossTime[i] > now:
@@ -803,6 +831,24 @@ async def dbLoad():
 		print ("보스타임 정보가 없습니다.")
 
 #고정보스 날짜저장
+async def FixedBossDateSave():
+	global fixed_bossData
+	global fixed_bossTime
+	global fixed_bossNum
+	global FixedBossDateData
+	global indexFixedBossname
+
+	for i in range(fixed_bossNum):
+		FixedBossDateData[indexFixedBossname[i] + 3] = 'startDate = '+ fixed_bossTime[i].strftime('%Y-%m-%d') + '\n'
+
+	FixedBossDateDataSTR = ""
+	for j in range(len(FixedBossDateData)):
+		pos = len(FixedBossDateData[j])
+		tmpSTR = FixedBossDateData[j][:pos-1] + '\r\n'
+		FixedBossDateDataSTR += tmpSTR
+
+	contents = repo.get_contents("fixed_boss.ini")
+	repo.update_file(contents.path, "bossDB", FixedBossDateDataSTR, contents.sha)
 
 #사다리함수		
 async def LadderFunc(number, ladderlist, channelVal):
@@ -1622,13 +1668,13 @@ while True:
 			cal_tax1 = floor(float(separate_money[1])*0.05)
 			
 			real_money = floor(floor(float(separate_money[1])) - cal_tax1)
-			cal_tax2 = floor(float(floor(real_money*0.05)))
+			cal_tax2 = floor(real_money/num_sep) - floor(float(floor(real_money/num_sep))*0.95)
 			if num_sep == 0 :
 				await ctx.send('```분배 인원이 0입니다. 재입력 해주세요.```', tts=False)
 			else :
 				embed = discord.Embed(
 					title = "----- 분배결과! -----",
-					description= '```1차 세금 : ' + str(cal_tax1) + '\n1차 수령액 : ' + str(real_money) + '\n분배자금액 : ' + str(floor(real_money/num_sep)) + '\n혈비 : ' + str(cal_tax2) + '\n인당 실수령액 : ' + str(floor(float(floor(real_money/num_sep))*0.9)) + '```',
+					description= '```1차 세금 : ' + str(cal_tax1) + '\n1차 수령액 : ' + str(real_money) + '\n분배자 거래소등록금액 : ' + str(floor(real_money/num_sep)) + '\n2차 세금 : ' + str(cal_tax2) + '\n인당 실수령액 : ' + str(floor(float(floor(real_money/num_sep))*0.95)) + '```',
 					color=0xff00ff
 					)
 				await ctx.send(embed=embed, tts=False)
@@ -2161,7 +2207,30 @@ while True:
 								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (멍 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
 
 			###########################고정보스출력
-			
+			if len(fixedboss_information[0]) != 0:
+				fixedboss_information[0] = "```diff\n" + fixedboss_information[0] + "\n```"
+			else :
+				fixedboss_information[0] = '``` ```'
+	
+			embed = discord.Embed(
+					title = "----- 고 정 보 스 -----",
+					description= fixedboss_information[0],
+					color=0x0000ff
+					)
+			await ctx.send( embed=embed, tts=False)
+			for i in range(len(fixedboss_information)-1):
+				if len(fixedboss_information[i+1]) != 0:
+					fixedboss_information[i+1] = "```diff\n" + fixedboss_information[i+1] + "\n```"
+				else :
+					fixedboss_information[i+1] = '``` ```'
+
+				embed = discord.Embed(
+						title = '',
+						description= fixedboss_information[i+1],
+						color=0x0000ff
+						)
+				await ctx.send( embed=embed, tts=False)
+
 			###########################일반보스출력
 			if len(boss_information[0]) != 0:
 				boss_information[0] = "```diff\n" + boss_information[0] + "\n```"
